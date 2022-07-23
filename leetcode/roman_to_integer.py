@@ -14,12 +14,12 @@ class Solution:
         i = len(deg) - 1
 
         while i >= 0:
-            if deg[i] > deg[i-1]:
-                res += deg[i] - deg[i-1]
-                i -= 2
-            else:
+            if i == 0 or deg[i] <= deg[i - 1]:
                 res += deg[i]
                 i -= 1
+            elif deg[i] > deg[i - 1]:
+                res += deg[i] - deg[i - 1]
+                i -= 2
 
         return res
 
