@@ -11,18 +11,21 @@ impl ListNode {
         ListNode { next: None, val }
     }
 
-    fn from_list(list: &[i32]) -> Self{
+    fn from_list(list: &[i32]) -> Self {
         let mut iter_list = list.into_iter();
 
         let mut res = Self {
             val: iter_list.next().unwrap().clone(),
-            next: None
+            next: None,
         };
 
         let mut node = &mut res;
 
         for i in iter_list {
-            node.next = Some(Box::new(ListNode { val: *i, next: None }));
+            node.next = Some(Box::new(ListNode {
+                val: *i,
+                next: None,
+            }));
 
             node = node.next.as_mut().unwrap()
         }
@@ -53,7 +56,10 @@ fn number_to_listnode(x: usize) -> ListNode {
     let mut num = x;
     let base = 10;
 
-    let mut res = ListNode { val: (num % base) as i32, next: None };
+    let mut res = ListNode {
+        val: (num % base) as i32,
+        next: None,
+    };
     num /= base;
 
     let mut node = &mut res;
@@ -99,11 +105,11 @@ pub fn add_two_numbers(
 
         sum += match x.as_ref() {
             Some(next_node) => next_node.val,
-            None => 0
+            None => 0,
         };
         sum += match y.as_ref() {
             Some(next_node) => next_node.val,
-            None => 0
+            None => 0,
         };
 
         (div, rem) = (sum / 10, sum % 10);
@@ -112,14 +118,16 @@ pub fn add_two_numbers(
 
         x = match x.as_ref() {
             Some(node) => &node.next,
-            None => &None
+            None => &None,
         };
         y = match y.as_ref() {
             Some(node) => &node.next,
-            None => &None
+            None => &None,
         };
 
-        if !(x.is_some() || y.is_some() || div > 0) { break }
+        if !(x.is_some() || y.is_some() || div > 0) {
+            break;
+        }
 
         node.next = Some(Box::new(ListNode::new(0)));
         node = node.next.as_mut().unwrap();
@@ -139,15 +147,13 @@ mod tests {
 
     #[test]
     fn from_list() {
-        let x = dbg!(ListNode::from_list(&[1,9,9,9,9,9,9,9,9,9]));
+        let x = dbg!(ListNode::from_list(&[1, 9, 9, 9, 9, 9, 9, 9, 9, 9]));
         dbg!(listnode_to_number(&x));
     }
 
     #[test]
     fn convert() {
-        assert_eq!(
-            listnode_to_number(&number_to_listnode(235)), 235
-        );
+        assert_eq!(listnode_to_number(&number_to_listnode(235)), 235);
     }
 
     #[test]
