@@ -1,0 +1,3 @@
+[workspace]
+
+members = ["categorize_new_member", "is_string_ends_with"]
